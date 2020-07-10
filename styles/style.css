@@ -2,14 +2,22 @@
   display: flex;
 }
 
-.serieStyle {
+.js__serieStyle {
   background-color: pink;
 }
 
-.serieStyleFavourite {
+.js__serieStyleFavourite {
   background-color: green;
 }
 
 .hidden {
   display: none;
+}
+
+.js__elements {
+  list-style: none;
+}
+
+.js__favouriteList {
+  list-style: none;
 }

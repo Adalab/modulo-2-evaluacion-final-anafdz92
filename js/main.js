@@ -45,7 +45,7 @@ const paintSeries = () => {
     } else {
       imgSerie = series[index].show.image.medium;
     }
-    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "${favClass} serieStyle">`;
+    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "${favClass} js__serieStyle">`;
     firstListCodeHTML += `<article>`;
     firstListCodeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
     firstListCodeHTML += `<p> ${series[index].show.name}</p>`;
@@ -54,7 +54,8 @@ const paintSeries = () => {
   }
 
   // BUCLE ARRAY SERIES FAVORITAS
-  //const favouriteList = document.querySelector(".js__favouriteList");
+
+  //María, Miguel: Tenía este código preparado para que ocultase la lista de favoritos si estaba vacía pero creo que no es necesario.
 
   // if (favourites.length === 0) {
   //   favouriteList.classList.add("hidden");
@@ -68,10 +69,11 @@ const paintSeries = () => {
       imgfavourite = favourites[index].show.image.medium;
     }
 
-    secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "serieStyleFavourite">`;
+    secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "js__serieStyleFavourite">`;
     secondListCodeHTML += `<article>`;
     secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
     secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
+    secondListCodeHTML += `<input id="checkfavouriteSerie" type="checkbox" value = "selectFavourite" name ="favouriteOptions" />`;
     secondListCodeHTML += `</article>`;
     secondListCodeHTML += `</li>`;
   }
@@ -87,7 +89,7 @@ const paintSeries = () => {
 //3. SELECCIONAR FAVORITA.
 
 function listenSeries() {
-  let selectSeries = document.querySelectorAll(".serieStyle");
+  let selectSeries = document.querySelectorAll(".js__serieStyle");
   console.log(selectSeries);
 
   for (const serie of selectSeries) {
