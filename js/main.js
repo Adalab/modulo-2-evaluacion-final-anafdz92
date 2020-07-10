@@ -33,23 +33,54 @@ buttonSearch.addEventListener("click", getDataFromApi);
 //2. CREAMOS UNHA FUNCIÓN PARA PINTAR
 
 const paintSeries = () => {
-  let codeHTML = "";
+  let firstListCodeHTML = "";
+  let secondListCodeHTML = "";
   let imgSerie;
+  let favClass;
+
+  //BULCE ARRAY SERIES
   for (let index = 0; index < series.length; index += 1) {
     if (!series[index].show.image) {
       imgSerie = `./images/gremlins.jpg`;
     } else {
       imgSerie = series[index].show.image.medium;
     }
-    codeHTML += `<li id = "${series[index].show.id}" class = "serieStyle">`;
-    codeHTML += `<article>`;
-    codeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
-    codeHTML += `<p> ${series[index].show.name}</p>`;
-    codeHTML += `</article>`;
-    codeHTML += `</li>`;
+    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "${favClass} serieStyle">`;
+    firstListCodeHTML += `<article>`;
+    firstListCodeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
+    firstListCodeHTML += `<p> ${series[index].show.name}</p>`;
+    firstListCodeHTML += `</article>`;
+    firstListCodeHTML += `</li>`;
   }
+
+  // BUCLE ARRAY SERIES FAVORITAS
+  //const favouriteList = document.querySelector(".js__favouriteList");
+
+  // if (favourites.length === 0) {
+  //   favouriteList.classList.add("hidden");
+  // } else {
+  let imgfavourite;
+
+  for (let index = 0; index < favourites.length; index += 1) {
+    if (!favourites[index].show.image) {
+      imgfavourite = `./images/gremlins.jpg`;
+    } else {
+      imgfavourite = favourites[index].show.image.medium;
+    }
+
+    secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "serieStyleFavourite">`;
+    secondListCodeHTML += `<article>`;
+    secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
+    secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
+    secondListCodeHTML += `</article>`;
+    secondListCodeHTML += `</li>`;
+  }
+  const favouriteList = document.querySelector(".js__favouriteList");
+  favouriteList.innerHTML = secondListCodeHTML;
+
   const cartSeries = document.querySelector(".js__elements");
-  cartSeries.innerHTML = codeHTML;
+  cartSeries.innerHTML = firstListCodeHTML;
+
   listenSeries();
 };
 
@@ -68,8 +99,27 @@ function changeFavourite(ev) {
   for (let i = 0; i < series.length; i++) {
     console.log("hola", clickedSerie, series[i].show.id);
     if (clickedSerie === series[i].show.id) {
-      favourites.push(series[i].show);
+      favourites.push(series[i]);
     }
+    updateLocalStorage();
   }
+
+  paintSeries();
   console.log(favourites);
 }
+
+//LOCAL STORAGE
+
+const updateLocalStorage = () => {
+  localStorage.setItem("favourites", JSON.stringify(favourites));
+};
+
+const getFromLocalStorage = () => {
+  const data = JSON.parse(localStorage.getItem("favourites"));
+  if (data !== null) {
+    favourites = data;
+  }
+};
+
+getFromLocalStorage();
+paintSeries();
