@@ -57,11 +57,15 @@ const paintSeries = () => {
     } else {
       imgSerie = series[index].show.image.medium;
     }
-    //CONDICIONAL PARA QUE SE POÑA VERDE SE ESTÁ NO ARRAY DE FAVORITOS
-    // if (favourites.includes(series[index].show.id)) {
-    //   series[index].show.id.classList.add(`js__serieStyleFavourite`);
-    // } else {
-    //   series[index].show.id.classList.add(`js__serieStyleFavourite`);
+    //CONDICIONAL PARA QUE SE POÑA VERDE SE ESTÁ NO ARRAY DE FAVORITOS.
+    //Necesitaría engadir favClass no HMTL indentado coma clase ${favClass} pero devolve "undefined".
+
+    // for (let index = 0; index < favourites.length; index += 1) {
+    //   if (favourites[index].show.id === series[index].show.id) {
+    //     favClass = `js__serieStyle`; //undefined
+    //   } else {
+    //     favClass = `js__serieStyleFavourite`;
+    //   }
     // }
 
     firstListCodeHTML += `<li id = "${series[index].show.id}" class = "js__serieStyle">`;
@@ -77,11 +81,6 @@ const paintSeries = () => {
 
   // BUCLE ARRAY SERIES FAVORITAS
 
-  //María, Miguel: Tenía este código preparado para que ocultase la lista de favoritos si estaba vacía pero creo que no es necesario.
-
-  // if (favourites.length === 0) {
-  //   favouriteList.classList.add("hidden");
-  // } else {
   let imgfavourite;
 
   for (let index = 0; index < favourites.length; index += 1) {
@@ -105,6 +104,7 @@ const paintSeries = () => {
 
   listenSeries();
   listenReset();
+  listenFavourites();
 };
 
 //3. SELECCIONAR FAVORITA.
@@ -204,13 +204,14 @@ const getFromLocalStorage = () => {
 // RESET FAVOURITES
 
 function listenReset() {
+  //Seleccionamos o Botón
   const btnReset = document.querySelector(".btnReset");
-
+  // Escoitamos
   btnReset.addEventListener("click", resetAll);
 }
 
 function resetAll() {
-  let favourites = [];
+  let favourites = 0;
   window.localStorage.clear();
   paintSeries();
 }
