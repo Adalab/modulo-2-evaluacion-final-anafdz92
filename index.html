@@ -10,7 +10,7 @@
     <h1>Buscador de series</h1>
     <input type="text" name="text" class="js-search__text" />
     <button
-      id="search-button"
+      id="searchButton"
       class="search-button js-search-button"
       type="button"
     >
@@ -18,8 +18,13 @@
     </button>
     <div class="twoLists">
       <ul class="js__elements"></ul>
-      <!-- <p>Mis series favoritas</p> -->
-      <ul class="js__favouriteList"></ul>
+      <div class="favourite__container">
+        <button name="reset" class="btnReset">
+          <i class="far fa-trash-alt">Reset</i>
+        </button>
+        <h3 class="title">Mis series favoritas</h3>
+        <ul class="js__favouriteList"></ul>
+      </div>
       <script src="./js/main.js"></script>
     </div>
   </body>

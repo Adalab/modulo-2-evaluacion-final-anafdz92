@@ -18,6 +18,45 @@
   list-style: none;
 }
 
+.favourite__container {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  text-align: center;
+  margin-left: 40px;
+}
+
 .js__favouriteList {
   list-style: none;
 }
+
+.btnReset {
+  width: 70px;
+  text-align: center;
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+/* .twoLists {
+  display: flex;
+
+  &__js__elements {
+    list-style: none;
+  }
+
+  &__favourite__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__title {
+      background-color: blue;
+    }
+
+    &__js__favouriteList {
+      list-style: none;
+    }
+  }
+} */

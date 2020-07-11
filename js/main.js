@@ -38,6 +38,13 @@ const paintSeries = () => {
   let imgSerie;
   let favClass;
 
+  //Si no hay series favoritas borrar el título "Mis series favoritas" NO FUNCIONA
+
+  if (favourites.length > 0) {
+    let title = document.querySelector(".title");
+    title.innerHML = "Mis series favoritas";
+  }
+
   //BULCE ARRAY SERIES
   for (let index = 0; index < series.length; index += 1) {
     if (!series[index].show.image) {
@@ -45,10 +52,20 @@ const paintSeries = () => {
     } else {
       imgSerie = series[index].show.image.medium;
     }
-    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "${favClass} js__serieStyle">`;
+    //CONDICIONAL PARA QUE SE POÑA VERDE SE ESTÁ NO ARRAY DE FAVORITOS
+    // if (favourites.includes(series[index])) {
+    //   series[index].classList.add(".js__serieStyleFavourite");
+    // } else {
+    //   series[index].classList.add(".js__serieStyleFavourite");
+    // }
+
+    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "js__serieStyle">`;
     firstListCodeHTML += `<article>`;
     firstListCodeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
     firstListCodeHTML += `<p> ${series[index].show.name}</p>`;
+    firstListCodeHTML += `<label for="checkfavouriteSerie">`;
+    firstListCodeHTML += `<input id="checkfavouriteSerie" type="radio" class="checkfavouriteSerie" value = "" name ="favouriteOptions" />`;
+    firstListCodeHTML += `</label>`;
     firstListCodeHTML += `</article>`;
     firstListCodeHTML += `</li>`;
   }
@@ -68,12 +85,10 @@ const paintSeries = () => {
     } else {
       imgfavourite = favourites[index].show.image.medium;
     }
-
     secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "js__serieStyleFavourite">`;
     secondListCodeHTML += `<article>`;
     secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
     secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
-    secondListCodeHTML += `<input id="checkfavouriteSerie" type="checkbox" value = "selectFavourite" name ="favouriteOptions" />`;
     secondListCodeHTML += `</article>`;
     secondListCodeHTML += `</li>`;
   }
@@ -84,6 +99,7 @@ const paintSeries = () => {
   cartSeries.innerHTML = firstListCodeHTML;
 
   listenSeries();
+  listenReset();
 };
 
 //3. SELECCIONAR FAVORITA.
@@ -96,21 +112,52 @@ function listenSeries() {
     serie.addEventListener("click", changeFavourite);
   }
 }
+
+//VERSION CHANGE FAVOURITE SIMPLE (FUNCIONA)
 function changeFavourite(ev) {
   let clickedSerie = parseInt(ev.currentTarget.id);
   for (let i = 0; i < series.length; i++) {
     console.log("hola", clickedSerie, series[i].show.id);
     if (clickedSerie === series[i].show.id) {
+      //series[i].classList.add(".js__serieStyleFavourite"); y pintala de verde
       favourites.push(series[i]);
+      //series[i].classList.add(".js__serieStyleFavourite"); //cambiar a verde?
     }
     updateLocalStorage();
   }
 
   paintSeries();
-  console.log(favourites);
 }
 
-//LOCAL STORAGE
+//VERSIÓN CHANGE FAVOURITE PARA QUE NO SE REPITA LA IMAGEN EN FAVORITOS
+//Si favoritos no contiene la serie clickada: métela si la contiene sacala
+// function changeFavourite(ev) {
+//   for (let clickedSerie of favourites) {
+//     if (!favourites.includes(clickedSerie)) {
+//       let clickedSerie = parseInt(ev.currentTarget.id);
+//       for (let i = 0; i < series.length; i++) {
+//         console.log("hola", clickedSerie, series[i].show.id);
+//         if (clickedSerie === series[i].show.id) {
+//           //series[i].classList.add(".js__serieStyleFavourite"); y pintala de verde
+//           favourites.push(series[i]);
+//         }
+//       }
+//     } else {
+//       let clickedSerie = parseInt(ev.currentTarget.id);
+//       for (let i = 0; i < series.length; i++) {
+//         console.log("hola", clickedSerie, series[i].show.id);
+//         if (clickedSerie === series[i].show.id) {
+//           //series[i].classList.add(".js__serieStyleFavourite"); y pintala de verde
+//           favourites.splice([i], 1);
+//         }
+//       }
+//     }
+//     updateLocalStorage();
+//   }
+//   paintSeries();
+// }
+
+//4.LOCAL STORAGE
 
 const updateLocalStorage = () => {
   localStorage.setItem("favourites", JSON.stringify(favourites));
@@ -122,6 +169,46 @@ const getFromLocalStorage = () => {
     favourites = data;
   }
 };
+
+//5.SI HAGO CLICK EN LA X BORRO EL ELEMENTO DEL ARRAY
+
+//seleccionar imput
+// let selectCheckBox = document.querySelectorAll("#checkfavouriteSerie");
+// function listenFavourites() {
+//   for (const checkBox of selectCheckBox) {
+//     selectCheckBox.addEventListener("click", RemoveFavourite);
+//   }
+// }
+
+// function RemoveFavourite(ev) {
+//   if (selectCheckBox.checked) {
+//   selectCheckBox.value = parseInt(ev.currentTarget.id);
+//     for (let i = 0; i < series.length; i++) {
+//       if (selectCheckBox.value === series[i].show.id) {
+//         favourites.splice([i], 1);
+//     changeFavourite();
+//   } else {
+//
+//       }
+//     }
+//    updateLocalStorage();
+//   }
+//   paintSeries();
+// }
+
+// RESET FAVOURITES
+
+function listenReset() {
+  const btnReset = document.querySelector(".btnReset");
+
+  btnReset.addEventListener("click", resetAll);
+}
+
+function resetAll() {
+  let favourites = [];
+  window.localStorage.clear();
+  paintSeries();
+}
 
 getFromLocalStorage();
 paintSeries();
