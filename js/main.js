@@ -38,14 +38,19 @@ const paintSeries = () => {
   let imgSerie;
   let favClass;
 
-  //Si no hay series favoritas borrar el título "Mis series favoritas" NO FUNCIONA
+  //Se non hai series favoritas borramos "Mis series favoritas" e o reset
 
   if (favourites.length > 0) {
-    let title = document.querySelector(".title");
-    title.innerHML = "Mis series favoritas";
+    debugger;
+    const titleFav = document.querySelector(`.title`);
+    titleFav.classList.remove(`hidden`);
+    const ResetBtn = document.querySelector(`.resetBtn`);
+    ResetBtn.classList.remove(`hidden`);
   }
 
   //BULCE ARRAY SERIES
+
+  //Percorremos o array, se non ten imaxe poñemos a de Gremlins
   for (let index = 0; index < series.length; index += 1) {
     if (!series[index].show.image) {
       imgSerie = `./images/gremlins.jpg`;
@@ -53,10 +58,10 @@ const paintSeries = () => {
       imgSerie = series[index].show.image.medium;
     }
     //CONDICIONAL PARA QUE SE POÑA VERDE SE ESTÁ NO ARRAY DE FAVORITOS
-    // if (favourites.includes(series[index])) {
-    //   series[index].classList.add(".js__serieStyleFavourite");
+    // if (favourites.includes(series[index].show.id)) {
+    //   series[index].show.id.classList.add(`js__serieStyleFavourite`);
     // } else {
-    //   series[index].classList.add(".js__serieStyleFavourite");
+    //   series[index].show.id.classList.add(`js__serieStyleFavourite`);
     // }
 
     firstListCodeHTML += `<li id = "${series[index].show.id}" class = "js__serieStyle">`;
