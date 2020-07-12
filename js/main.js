@@ -107,7 +107,7 @@ const paintSeries = () => {
 
   listenSeries();
   listenReset();
-  //listenFavourites();
+  listenFavourites();
 };
 
 function showFavContainer() {
@@ -176,27 +176,24 @@ const getFromLocalStorage = () => {
 
 //Devolve que selectCheckBox is not a function
 
-//seleccionar imput
+//seleccionar imputx
+function removeFavourite(ev) {
+  let clickedCheckBox = parseInt(ev.currentTarget.value);
+  for (let i = 0; i < favourites.length; i++) {
+    if (clickedCheckBox === favourites[i].show.id) {
+      favourites.splice([i], 1);
+    }
+    updateLocalStorage();
+  }
+  paintSeries();
+}
 
-// function listenFavourites() {
-//   let selectCheckBox = document.querySelectorAll(".checkfavouriteSerie");
-//   for (let i = 0; i < favourites.length; i++) {
-//     selectCheckBox.addEventListener("click", removeFavourite);
-//   }
-// }
-
-// function removeFavourite(ev) {
-//   let clickedCheckBox = parseInt(ev.currentTarget.id);
-//   for (let i = 0; i < favourites.length; i++) {
-//     if (clickedCheckBox === favourites[i].show.id) {
-//       favourites.splice([i], 1);
-//       localStorage.removeItem("favourites[i]", JSON.stringify(favourites[i]));
-//
-//     }
-//     updateLocalStorage();
-//   }
-//   paintSeries();
-// }
+function listenFavourites() {
+  let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
+  for (let i = 0; i < favourites.length; i++) {
+    selectCheckBoxes.addEventListener("click", removeFavourite);
+  }
+}
 
 // RESET FAVOURITES
 
@@ -216,3 +213,4 @@ function resetAll() {
 
 getFromLocalStorage();
 paintSeries();
+listenFavourites();
