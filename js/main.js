@@ -62,12 +62,13 @@ const paintSeries = () => {
     //Necesitaría engadir favClass no HMTL indentado coma clase ${favClass}.
 
     let serie = series[index];
-    for (let i = 0; i < favourites.length; i += 1) {
-      if (serie.show.id === favourites[i].show.id) {
-        favClass = `js__serieStyleFavourite`;
-      } else {
-        favClass = `js__serieStyle`;
-      }
+    const serieGreenFav = favourites.find(
+      (favourite) => serie.show.id === favourite.show.id
+    );
+    if (serieGreenFav !== undefined) {
+      favClass = `js__serieStyleFavourite`;
+    } else {
+      favClass = `js__serieStyle`;
     }
 
     firstListCodeHTML += `<li id = "${series[index].show.id}" class = ${favClass}>`;
