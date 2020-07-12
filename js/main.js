@@ -8,7 +8,7 @@ let favourites = [];
 // 1.OBTER DATOS DA API
 
 //1.1Creamos a referencia o botón e engadimos o eventListener.
-//Mellor nunha función para telo todo en paquetiños
+//Mellor nunha función para telo todo en paquetiños??
 
 // const listenSearchButton = () => {
 
@@ -25,11 +25,10 @@ const getDataFromApi = () => {
   //1.3 Creamos unha referencia o valor do imput
   const serieName = document.querySelector(".js-search__text");
 
-  fetch(`http://api.tvmaze.com/search/shows?q=:${serieName.value}`)
+  fetch(`http://api.tvmaze.com/search/shows?q=:${serieName.}`)
     .then((response) => response.json())
     .then((data) => {
       series = data;
-      console.log(series);
       paintSeries();
     });
 };
@@ -45,8 +44,6 @@ const paintSeries = () => {
   let secondListCodeHTML = "";
   let imgSerie;
   let favClass = `js__serieStyle`;
-
-  //Se non hai series favoritas borramos "Mis series favoritas" e o reset
   showFavContainer();
 
   //BULCE ARRAY SERIES
@@ -63,12 +60,15 @@ const paintSeries = () => {
 
     let serie = series[index];
     const serieGreenFav = favourites.find(
-      (favourite) => serie.show.id === favourite.show.id
+      // Mellor find ca un bucle. Rompían cousiñas
+      (favourite) => serie.show.id === favourite.show.id //pode devolver a serie ou undefined se non a atopa.
     );
     if (serieGreenFav !== undefined) {
-      favClass = `js__serieStyleFavourite`;
+      //se non devolve undefned: significa que está
+      favClass = `js__serieStyleFavourite`; //se está no array de favoritos pintaa de favorita
     } else {
-      favClass = `js__serieStyle`;
+      //se non está que da rosa
+      favClass = `js__serieStyle`; // xa está por defecto, pero se a quito de aquí rompen cousiñas.
     }
 
     firstListCodeHTML += `<li id = "${series[index].show.id}" class = ${favClass}>`;
@@ -111,6 +111,7 @@ const paintSeries = () => {
 };
 
 function showFavContainer() {
+  //Se non hai favoritos non mostres o título e o botón de reset.
   if (favourites.length > 0) {
     const titleFav = document.querySelector(`.title`);
     titleFav.classList.remove(`hidden`);
@@ -125,9 +126,9 @@ function listenSeries() {
   let selectSeries = document.querySelectorAll(
     ".js__serieStyle, .js__serieStyleFavourite"
   );
-  console.log(selectSeries);
 
   for (const serie of selectSeries) {
+    //Escoitar tódalas series o facer click sobre elas.
     serie.addEventListener("click", changeFavourite);
   }
 }
@@ -136,7 +137,6 @@ function listenSeries() {
 function changeFavourite(ev) {
   let clickedSerie = parseInt(ev.currentTarget.id);
   for (let i = 0; i < series.length; i++) {
-    console.log("hola", clickedSerie, series[i].show.id);
     if (clickedSerie === series[i].show.id) {
       //Buscamos en favourites o obxecto cuxo id sexa igual co de series
       let serieFav = favourites.find(
@@ -174,11 +174,10 @@ const getFromLocalStorage = () => {
 
 //5.O FACER CLICK NA "X" O ELEMENTO DESAPARECE DO LOCALSTORAGE E DA LISTA
 
-//Devolve que selectCheckBox is not a function
+//Devolve que selectCheckBox is not a function. Permite eliminar solo cando hai búsquedas a dereita.
 
-//seleccionar imputx
 function removeFavourite(ev) {
-  let clickedCheckBox = parseInt(ev.currentTarget.value);
+  let clickedCheckBox = parseInt(ev.currentTarget.value); // Tanteando co id e co valor. diferencia? Está collendo o botón? ou está escoitando en todo o li?. Quizáis o botón debería estar fora?
   for (let i = 0; i < favourites.length; i++) {
     if (clickedCheckBox === favourites[i].show.id) {
       favourites.splice([i], 1);
@@ -189,6 +188,7 @@ function removeFavourite(ev) {
 }
 
 function listenFavourites() {
+  //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
   let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
   for (let i = 0; i < favourites.length; i++) {
     selectCheckBoxes.addEventListener("click", removeFavourite);
