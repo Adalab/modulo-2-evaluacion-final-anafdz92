@@ -39,14 +39,7 @@ const paintSeries = () => {
   let favClass;
 
   //Se non hai series favoritas borramos "Mis series favoritas" e o reset
-
-  if (favourites.length > 0) {
-    debugger;
-    const titleFav = document.querySelector(`.title`);
-    titleFav.classList.remove(`hidden`);
-    const ResetBtn = document.querySelector(`.resetBtn`);
-    ResetBtn.classList.remove(`hidden`);
-  }
+  showFavContainer();
 
   //BULCE ARRAY SERIES
 
@@ -72,9 +65,6 @@ const paintSeries = () => {
     firstListCodeHTML += `<article>`;
     firstListCodeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
     firstListCodeHTML += `<p> ${series[index].show.name}</p>`;
-    firstListCodeHTML += `<label for="checkfavouriteSerie">`;
-    firstListCodeHTML += `<input id="checkfavouriteSerie" type="radio" class="checkfavouriteSerie" value = "" name ="favouriteOptions" />`;
-    firstListCodeHTML += `</label>`;
     firstListCodeHTML += `</article>`;
     firstListCodeHTML += `</li>`;
   }
@@ -93,6 +83,9 @@ const paintSeries = () => {
     secondListCodeHTML += `<article>`;
     secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
     secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
+    secondListCodeHTML += `<label for="checkfavouriteSeries">`;
+    secondListCodeHTML += `<input id="" type="radio" class="checkfavouriteSerie" value = "" name ="favouriteOptions" />`;
+    secondListCodeHTML += `</label>`;
     secondListCodeHTML += `</article>`;
     secondListCodeHTML += `</li>`;
   }
@@ -104,8 +97,18 @@ const paintSeries = () => {
 
   listenSeries();
   listenReset();
-  listenFavourites();
+  //listenFavourites();
 };
+
+function showFavContainer() {
+  if (favourites.length > 0) {
+    debugger;
+    const titleFav = document.querySelector(`.title`);
+    titleFav.classList.remove(`hidden`);
+    const ResetBtn = document.querySelector(`.resetBtn`);
+    ResetBtn.classList.remove(`hidden`);
+  }
+}
 
 //3. SELECCIONAR FAVORITA.
 
@@ -118,13 +121,12 @@ function listenSeries() {
   }
 }
 
-//VERSION CHANGE FAVOURITE SIMPLE (FUNCIONA)
+//VERSION CHANGE FAVOURITE SIMPLE
 function changeFavourite(ev) {
   let clickedSerie = parseInt(ev.currentTarget.id);
   for (let i = 0; i < series.length; i++) {
     console.log("hola", clickedSerie, series[i].show.id);
     if (clickedSerie === series[i].show.id) {
-      //series[i].classList.add(".js__serieStyleFavourite"); y pintala de verde
       favourites.push(series[i]);
       //series[i].classList.add(".js__serieStyleFavourite"); //cambiar a verde?
     }
@@ -134,11 +136,12 @@ function changeFavourite(ev) {
   paintSeries();
 }
 
-//VERSIÓN CHANGE FAVOURITE PARA QUE NO SE REPITA LA IMAGEN EN FAVORITOS
+//VERSIÓN CHANGE FAVOURITE PRA ENGADIR/QUITAR DE FAVORITOS
 //Si favoritos no contiene la serie clickada: métela si la contiene sacala
 // function changeFavourite(ev) {
-//   for (let clickedSerie of favourites) {
-//     if (!favourites.includes(clickedSerie)) {
+//   let clickedSerie = parseInt(ev.currentTarget.id);
+//   for (let i = 0; i < favourites.length; i++) {
+//     if (!favourites[i].show.id === clickedSerie) {
 //       let clickedSerie = parseInt(ev.currentTarget.id);
 //       for (let i = 0; i < series.length; i++) {
 //         console.log("hola", clickedSerie, series[i].show.id);
@@ -152,7 +155,7 @@ function changeFavourite(ev) {
 //       for (let i = 0; i < series.length; i++) {
 //         console.log("hola", clickedSerie, series[i].show.id);
 //         if (clickedSerie === series[i].show.id) {
-//           //series[i].classList.add(".js__serieStyleFavourite"); y pintala de verde
+//           //series[i].classList.add("js__serieStyle"); y pintala de lila
 //           favourites.splice([i], 1);
 //         }
 //       }
@@ -168,6 +171,10 @@ const updateLocalStorage = () => {
   localStorage.setItem("favourites", JSON.stringify(favourites));
 };
 
+// const removeFromLocalStorage = () => {
+//   localStorage.removeItem("favourites", JSON.stringify(favourites));
+// };
+
 const getFromLocalStorage = () => {
   const data = JSON.parse(localStorage.getItem("favourites"));
   if (data !== null) {
@@ -175,28 +182,28 @@ const getFromLocalStorage = () => {
   }
 };
 
-//5.SI HAGO CLICK EN LA X BORRO EL ELEMENTO DEL ARRAY
+//5.O FACER CLICK NA "X" O ELEMENTO DESAPARECE DO LOCALSTORAGE E DA LISTA
+
+//Devolve que selectCheckBox is not a function
 
 //seleccionar imput
-// let selectCheckBox = document.querySelectorAll("#checkfavouriteSerie");
+
 // function listenFavourites() {
-//   for (const checkBox of selectCheckBox) {
-//     selectCheckBox.addEventListener("click", RemoveFavourite);
+//   let selectCheckBox = document.querySelectorAll(".checkfavouriteSerie");
+//   for (let i = 0; i < favourites.length; i++) {
+//     selectCheckBox.addEventListener("click", removeFavourite);
 //   }
 // }
 
-// function RemoveFavourite(ev) {
-//   if (selectCheckBox.checked) {
-//   selectCheckBox.value = parseInt(ev.currentTarget.id);
-//     for (let i = 0; i < series.length; i++) {
-//       if (selectCheckBox.value === series[i].show.id) {
-//         favourites.splice([i], 1);
-//     changeFavourite();
-//   } else {
+// function removeFavourite(ev) {
+//   let clickedCheckBox = parseInt(ev.currentTarget.id);
+//   for (let i = 0; i < favourites.length; i++) {
+//     if (clickedCheckBox === favourites[i].show.id) {
+//       favourites.splice([i], 1);
+//       localStorage.removeItem("favourites[i]", JSON.stringify(favourites[i]));
 //
-//       }
 //     }
-//    updateLocalStorage();
+//     updateLocalStorage();
 //   }
 //   paintSeries();
 // }
@@ -211,9 +218,10 @@ function listenReset() {
 }
 
 function resetAll() {
-  let favourites = 0;
+  favourites.length = 0;
   window.localStorage.clear();
   paintSeries();
+  //reset y el título desaparecen?
 }
 
 getFromLocalStorage();
