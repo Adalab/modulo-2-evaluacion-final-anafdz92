@@ -190,15 +190,16 @@ function removeFavourite(ev) {
   paintSeries();
 }
 
-function listenFavourites() {
-  //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
-  let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
-  for (let i = 0; i < favourites.length; i++) {
-    selectCheckBoxes.addEventListener("click", removeFavourite);
-  }
-}
+// function listenFavourites() {
+//   //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
+//   let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
+//   for (let i = 0; i < favourites.length; i++) {
+//     selectCheckBoxes.addEventListener("click", removeFavourite);
+//   }
+// }
+// OPCIÓNS PARA TERMINAR DE RESOLVER:
+// Deixar de escoitar Listen series cando o array de series está valeiro e eliminar o facer click sobre o ckeckbox.
 
-/*
 function listenFavourites() {
   //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
   let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
@@ -206,7 +207,6 @@ function listenFavourites() {
     selectCheckBoxes[i].addEventListener("click", removeFavourite);
   }
 }
-*/
 
 // RESET FAVOURITES
 
