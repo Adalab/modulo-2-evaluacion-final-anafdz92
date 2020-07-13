@@ -25,7 +25,7 @@ const getDataFromApi = () => {
   //1.3 Creamos unha referencia o valor do imput
   const serieName = document.querySelector(".js-search__text");
 
-  fetch(`http://api.tvmaze.com/search/shows?q=:${serieName.}`)
+  fetch(`http://api.tvmaze.com/search/shows?q=:${serieName}`)
     .then((response) => response.json())
     .then((data) => {
       series = data;
