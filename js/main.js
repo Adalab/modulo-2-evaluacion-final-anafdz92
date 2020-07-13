@@ -65,9 +65,9 @@ const paintSeries = () => {
     );
     if (serieGreenFav !== undefined) {
       //se non devolve undefned: significa que está
-      favClass = `js__serieStyleFavourite`; //se está no array de favoritos pintaa de favorita
+      favClass = `js__serieStyleFavourite`; //se está no array de favoritos píntaa de favorita
     } else {
-      //se non está que da rosa
+      //se non está queda rosa
       favClass = `js__serieStyle`; // xa está por defecto, pero se a quito de aquí rompen cousiñas.
     }
 
@@ -133,7 +133,7 @@ function listenSeries() {
   }
 }
 
-//VERSION CHANGE FAVOURITE SIMPLE
+//CHANGE FAVOURITES
 function changeFavourite(ev) {
   let clickedSerie = parseInt(ev.currentTarget.id);
   for (let i = 0; i < series.length; i++) {
@@ -150,7 +150,7 @@ function changeFavourite(ev) {
       }
       //Se non o atopamos non está en favoritos
       else {
-        favourites.push(series[i]);
+        favourites.push(series[index]);
       }
     }
     updateLocalStorage();
@@ -177,7 +177,10 @@ const getFromLocalStorage = () => {
 //Devolve que selectCheckBox is not a function. Permite eliminar solo cando hai búsquedas a dereita.
 
 function removeFavourite(ev) {
-  let clickedCheckBox = parseInt(ev.currentTarget.value); // Tanteando co id e co valor. diferencia? Está collendo o botón? ou está escoitando en todo o li?. Quizáis o botón debería estar fora?
+  if (series !== 0) {
+    //Intentei crear un else onde dixera que se series era 0 borrase o elemento clickado pero non funciona.
+  }
+  let clickedCheckBox = parseInt(ev.currentTarget.value); // O poñer o valor permite seleccionar varias pero non desmarcalas cando recargas a páxina.
   for (let i = 0; i < favourites.length; i++) {
     if (clickedCheckBox === favourites[i].show.id) {
       favourites.splice([i], 1);
