@@ -150,7 +150,7 @@ function changeFavourite(ev) {
       }
       //Se non o atopamos non está en favoritos
       else {
-        favourites.push(series[index]);
+        favourites.push(series[i]);
       }
     }
     updateLocalStorage();
@@ -177,7 +177,7 @@ const getFromLocalStorage = () => {
 //Devolve que selectCheckBox is not a function. Permite eliminar solo cando hai búsquedas a dereita.
 
 function removeFavourite(ev) {
-  if (series !== 0) {
+  if (series.length !== 0) {
     //Intentei crear un else onde dixera que se series era 0 borrase o elemento clickado pero non funciona.
   }
   let clickedCheckBox = parseInt(ev.currentTarget.value); // O poñer o valor permite seleccionar varias pero non desmarcalas cando recargas a páxina.
@@ -197,6 +197,16 @@ function listenFavourites() {
     selectCheckBoxes.addEventListener("click", removeFavourite);
   }
 }
+
+/*
+function listenFavourites() {
+  //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
+  let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
+  for (let i = 0; i < selectCheckBoxes.length; i++) {
+    selectCheckBoxes[i].addEventListener("click", removeFavourite);
+  }
+}
+*/
 
 // RESET FAVOURITES
 
