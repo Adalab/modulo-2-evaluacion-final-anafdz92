@@ -71,10 +71,11 @@ const paintSeries = () => {
       favClass = `js__serieStyle`; // xa está por defecto, pero se a quito de aquí rompen cousiñas.
     }
 
-    firstListCodeHTML += `<li id = "${series[index].show.id}" class = ${favClass}>`;
-    firstListCodeHTML += `<article>`;
+    firstListCodeHTML += `<li id = "${series[index].show.id}" class = "${favClass} item" >`;
+    firstListCodeHTML += `<article class="imgContainer">`;
     firstListCodeHTML += `<img src= "${imgSerie}" class ="card__img" alt="Foto de ${series[index].show.name}"/> `;
-    firstListCodeHTML += `<p> ${series[index].show.name}</p>`;
+    firstListCodeHTML += `<p class="name"> ${series[index].show.name}</p>`;
+    firstListCodeHTML += `<p class="status"> ${series[index].show.status}</p>`;
     firstListCodeHTML += `</article>`;
     firstListCodeHTML += `</li>`;
   }
@@ -89,8 +90,8 @@ const paintSeries = () => {
     } else {
       imgfavourite = favourites[index].show.image.medium;
     }
-    secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "js__serieStyleFavourite">`;
-    secondListCodeHTML += `<article>`;
+    secondListCodeHTML += `<li id = "${favourites[index].show.id}" class = "js__serieStyleFavourite itemFav">`;
+    secondListCodeHTML += `<article class="imgContainerFav">`;
     secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
     secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
     secondListCodeHTML += `<label for="checkfavouriteSeries">`;
@@ -190,21 +191,30 @@ function removeFavourite(ev) {
   paintSeries();
 }
 
-// function listenFavourites() {
-//   //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
-//   let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
-//   for (let i = 0; i < favourites.length; i++) {
-//     selectCheckBoxes.addEventListener("click", removeFavourite);
-//   }
-// }
 // OPCIÓNS PARA TERMINAR DE RESOLVER:
 // Deixar de escoitar Listen series cando o array de series está valeiro e eliminar o facer click sobre o ckeckbox.
+// cun if else en removeFavourite
 
 function listenFavourites() {
   //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
   let selectCheckBoxes = document.querySelectorAll(".checkfavouriteSerie");
   for (let i = 0; i < selectCheckBoxes.length; i++) {
     selectCheckBoxes[i].addEventListener("click", removeFavourite);
+  }
+}
+
+// BOTÓN LOG RECORRER FAVORITOS
+function listenLog() {
+  //Cambieina para aquí abaixo para ver se deixaba funcionar a removeFavourite
+  let selectLog = document.querySelector(".js-log-button");
+
+  selectLog.addEventListener("click", paintConsole);
+}
+listenLog();
+
+function paintConsole() {
+  for (let i = 0; i < favourites.length; i++) {
+    console.log(favourites[i].show.name);
   }
 }
 

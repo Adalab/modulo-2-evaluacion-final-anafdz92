@@ -3,28 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <title>Document</title>
     <link rel="stylesheet" href="./styles/style.css" />
   </head>
   <body class="body">
-    <h1 class="mainTitle">Buscador de series</h1>
-    <input type="text" name="text" class="js-search__text" />
-    <button
-      id="searchButton"
-      class="search-button js-search-button"
-      type="button"
-    >
-      Search
-    </button>
+    <h1 class="mainTitle">Busca una serie</h1>
+    <div class="mainSearch">
+      <input
+        type="text"
+        name="text"
+        class="js-search__text searchImput"
+        placeholder="Por ejemplo: Pose"
+      />
+      <button
+        id="searchButton"
+        class="search-button js-search-button"
+        type="button"
+      >
+        Search
+      </button>
+      <!-- <button id="LogButton" class="js-log-button" type="button">Log</button> -->
+    </div>
     <div class="twoLists">
       <div class="favourite__container">
         <div class="favouriteElements">
+          <h3 class="title hidden">Mis series favoritas</h3>
           <div class="resetBtn hidden">
             <button name="reset" class="btnReset">
               <i class="far fa-trash-alt">Reset</i>
             </button>
           </div>
-          <h3 class="title hidden">Mis series favoritas</h3>
         </div>
         <ul class="js__favouriteList"></ul>
       </div>

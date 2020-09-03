@@ -1,26 +1,86 @@
+* {
+  font-family: "Amatic SC", cursive;
+  font-size: 25px;
+}
+.body {
+  background: #9aafdd;
+}
 .mainTitle {
-  font-family: fantasy;
+  font-size: 80px;
   color: #d64161;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.mainSearch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.searchImput {
+  padding: 8px;
+  margin-right: 10px;
+  width: 200px;
+  height: 26px;
 }
 .search-button {
   border-radius: 15px;
   color: #d64161;
   border: none;
   cursor: pointer;
-  padding: 6px;
-  background-color: #feb236;
-  font-weight: bold;
+  padding: 10px;
+  background-color: #fcc24d;
+  font-size: 23px;
 }
 .twoLists {
   display: flex;
+  justify-content: center;
+  margin-top: 75px;
 }
 
 .js__serieStyle {
   background-color: pink;
 }
-
+.item {
+  border-radius: 7px;
+}
+.imgContainer {
+  height: 450px;
+  width: 250px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+.card__img {
+  margin-top: 20px;
+  object-fit: contain;
+}
+.name {
+  margin: 15px;
+  padding: 0px;
+}
+.status {
+  margin: 0px;
+  padding: 0px;
+}
+.imgContainerFav {
+  height: 450px;
+  width: 250px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.itemFav {
+  border-radius: 5px;
+}
 .js__serieStyleFavourite {
-  background-color: green;
+  background-color: #63d56a;
   color: purple;
   font-size: 25px;
 }
@@ -37,6 +97,11 @@
   display: flex;
   flex-direction: column;
 }
+.favouriteElements {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}
 
 .title {
   text-align: center;
@@ -48,10 +113,17 @@
 }
 
 .btnReset {
-  width: 70px;
+  width: 62px;
   text-align: center;
   margin-top: 20px;
-  margin-left: 40px;
+  margin-left: 20px;
+  border-radius: 15px;
+  color: #d64161;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  background-color: #fcc24d;
+  font-size: 23px;
 }
 
 /* .twoLists {
