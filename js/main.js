@@ -25,7 +25,7 @@ const getDataFromApi = () => {
   //1.3 Creamos unha referencia o valor do imput
   const serieName = document.querySelector(".js-search__text");
 
-  fetch(`http://api.tvmaze.com/search/shows?q=:${serieName.value}`)
+  fetch(`https://api.tvmaze.com/search/shows?q=:${serieName.value}`)
     .then((response) => response.json())
     .then((data) => {
       series = data;
@@ -95,7 +95,7 @@ const paintSeries = () => {
     secondListCodeHTML += `<img src= "${imgfavourite}" class ="card__img" alt="Foto de ${favourites[index].show.name}"/> `;
     secondListCodeHTML += `<p> ${favourites[index].show.name}</p>`;
     secondListCodeHTML += `<label for="checkfavouriteSeries">`;
-    secondListCodeHTML += `<input id="" type="radio" class="checkfavouriteSerie" value = "" name ="favouriteOptions" />`;
+    //secondListCodeHTML += `<input id="" type="radio" class="checkfavouriteSerie" value = "" name ="favouriteOptions" />`;
     secondListCodeHTML += `</label>`;
     secondListCodeHTML += `</article>`;
     secondListCodeHTML += `</li>`;
