@@ -2,8 +2,9 @@
   font-family: "Amatic SC", cursive;
   font-size: 25px;
 }
-.body {
-  background: #9aafdd;
+html {
+  min-height: 100%;
+  background: linear-gradient(to bottom, #9aafdd, #d64161);
 }
 .mainTitle {
   font-size: 80px;
@@ -31,7 +32,7 @@
   cursor: pointer;
   padding: 10px;
   background-color: #fcc24d;
-  font-size: 23px;
+  transition: color ease 0.8s;
 }
 .twoLists {
   display: flex;
@@ -125,25 +126,3 @@
   background-color: #fcc24d;
   font-size: 23px;
 }
-
-/* .twoLists {
-  display: flex;
-
-  &__js__elements {
-    list-style: none;
-  }
-
-  &__favourite__container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    &__title {
-      background-color: blue;
-    }
-
-    &__js__favouriteList {
-      list-style: none;
-    }
-  }
-} */
